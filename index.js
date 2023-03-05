@@ -31,11 +31,18 @@ const team = [];
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
-// Function to write into the HTML file
-function writeToHTML() {}
+// Function to write data into the HTML file
+function writeToHTML(data) {
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  fs.writeFile(outputPath, data, (err) => {
+    err ? console.error(err) : console.log("You have succesfully created your team.");
+  });
+}
 
 
-// Function to start the program
+// Function to start the program and create a manager
 function init() {
   inquirer.prompt([
     {
@@ -88,6 +95,7 @@ function init() {
     }
   ]).then((response) => {
     console.log(response);
+    // Once we have all the necessary data we create a manager object and push it to the team array
     const manager = new Manager(response.managerName, response.managerID, response.managerEmail, response.officeNum);
     console.log(manager instanceof Employee);
     team.push(manager);
@@ -95,7 +103,7 @@ function init() {
   })
 }
 
-// Function to fetch the options for the user
+// Function to fetch the options to the user
 function fetchOptions() {
   inquirer.prompt([
     {
@@ -111,7 +119,8 @@ function fetchOptions() {
   } else if (response.userChoice === "Add an intern") {
     addIntern();
   } else {
-    render(team);
+    const htmlTemplate = render(team);
+    writeToHTML(htmlTemplate);
   }
 });
 }
@@ -169,6 +178,7 @@ function addIntern() {
     }
   ]).then((response) => {
     console.log(response);
+    // Once we have all the necessary data we create an intern object and push it to the team array
     const intern = new Intern(response.internName, response.internID, response.internEmail, response.school);
     console.log(intern instanceof Employee);
     team.push(intern);
