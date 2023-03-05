@@ -23,8 +23,8 @@ const numRegex = /^[0-9]+$/;
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 // Regex has been taken from https://codingbeautydev.com/blog/javascript-check-if-string-contains-only-letters-and-spaces/
 const schoolRegex = /^[A-Za-z\s]*$/;
-// Regex has been taken from https://stackoverflow.com/questions/30281026/regex-parsing-github-usernames-javascript
-const githubRegex = /\B@([a-z0-9](?:-(?=[a-z0-9])|[a-z0-9]){0,38}(?<=[a-z0-9]))/gi;
+// Regex has been taken from https://github.com/shinnn/github-username-regex
+const githubRegex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
 // Array to store the Employee objects
 const team = [];
@@ -34,32 +34,6 @@ const team = [];
 // Function to write into the HTML file
 function writeToHTML() {}
 
-// Function to validate names
-// function validateName(str) {
-//   if (nameRegex.test(str)) return true;
-//   else {
-//     console.log("Please enter a valid firstname with only letters!");
-//     return false;
-//   }
-// }
-
-// Function to validate office number and id-s
-// function validateNumbers(num) {
-//   if (numRegex.test(num)) return true;
-//   else {
-//     console.log("Please enter a valid integer number!");
-//     return false;
-//   }
-// }
-
-// Function to validate email
-// function validateEmail(email) {
-//   if (emailRegex.test(email)) return true;
-//   else {
-//     console.log("Please enter a valid email address!");
-//     return false;
-//   }
-// }
 
 // Function to start the program
 function init() {
@@ -72,7 +46,7 @@ function init() {
         if (nameRegex.test(managerName)) return true;
         else {
           console.log("Please enter a valid firstname with only letters!");
-          return "";
+          return false;
   }
       }
     },
@@ -132,18 +106,14 @@ function fetchOptions() {
   }
 ]).then((response) => {
   console.log(response.userChoice);
-  switch(response.userChoice) {
-    case "Add an engineer":
-      addEngineer();
-      break;
-    case "Add an intern":
-      addIntern();
-      break;
-    case "Finish building team":
-      finishBuilding();
-      break;
+  if (response.userChoice === "Add an engineer") {
+    addEngineer();
+  } else if (response.userChoice === "Add an intern") {
+    addIntern();
+  } else {
+    render(team);
   }
-})
+});
 }
 
 // Function to add an intern to the team
@@ -157,7 +127,7 @@ function addIntern() {
         if (nameRegex.test(internName)) return true;
         else {
           console.log("Please enter a valid firstname with only letters!");
-          return "";
+          return false;
   }
       }
     },
@@ -204,15 +174,66 @@ function addIntern() {
     team.push(intern);
     fetchOptions();
   })
-  fetchOptions();
 }
 
 // Function to add an engineer to the team
 function addEngineer() {
-  fetchOptions();
+  inquirer.prompt([
+    {
+      type: "input",
+      message: "What is the engineer's name?",
+      name: "engineerName",
+      validate: function(engineerName) {
+        if (nameRegex.test(engineerName)) return true;
+        else {
+          console.log("Please enter a valid firstname with only letters!");
+          return false;
+  }
+      }
+    },
+    {
+      type: "input",
+      message: "What is the engineer's employee ID?",
+      name: "engineerID",
+      validate: function(engineerID) {
+        if (numRegex.test(engineerID)) return true;
+        else {
+          console.log("Please enter a valid integer number for employee id!");
+          return false;
+        }
+      }
+    },
+    {
+      type: "input",
+      message: "What is the engineer's email address?",
+      name: "engineerEmail",
+      validate: function(engineerEmail) {
+        if (emailRegex.test(engineerEmail)) return true;
+        else {
+          console.log("Please enter a valid email address!");
+          return false;
+        }
+      }
+    },
+    {
+      type: "input",
+      message: "What is the engineer's GitHub username?",
+      name: "github",
+      validate: function(github) {
+        if (githubRegex.test(github)) return true;
+        else {
+          console.log("Please enter a valid GitHub username!");
+          return false;
+        }
+      }
+    }
+  ]).then((response) => {
+    console.log(response);
+    const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.github);
+    console.log(engineer instanceof Employee);
+    team.push(engineer);
+    fetchOptions();
+  })
 }
-
-// ?
-function finishBuilding() {}
 
 init();
