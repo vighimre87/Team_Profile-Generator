@@ -14,7 +14,7 @@ It is a simple console application that let you create your team profile and dis
   - [Questions](#questions)
 
 ## Installation
-  1. Download the master folder from GitHub or clone the project folder to your local machine
+  1. Download the master folder from GitHub or clone the project folder to your local machine.
   2. In order to run the application you will need Node JS (I used v16.1). If you haven't got it, install it on your computer.
   3. Once you have these steps navigate to the root folder in the command line and type:
   ```
@@ -27,8 +27,8 @@ It is a simple console application that let you create your team profile and dis
   ```
   npm i jest
   ```
-  5. Create a .gitignore file in the root folder and add "node_modules"
-  6. Add Jest to devDependencies the package.json file and Inquirer and Jest to dependencies
+  5. Create a .gitignore file in the root folder and add "node_modules" to it.
+  6. Add Jest to devDependencies the package.json file and Inquirer and Jest to dependencies.
 
 ## Usage
   The application is a Node.js command line application that will take information about employees on a software engineering team, then generates a HTML webpage that displays data for each person. The application was built by using OOP method and TDD approach so the first step was to pass all the given tests. If you want to check that all test are passed just run the following command:
