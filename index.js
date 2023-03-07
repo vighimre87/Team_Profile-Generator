@@ -94,10 +94,8 @@ function init() {
       }
     }
   ]).then((response) => {
-    console.log(response);
     // Once we have all the necessary data we create a manager object and push it to the team array
     const manager = new Manager(response.managerName, response.managerID, response.managerEmail, response.officeNum);
-    console.log(manager instanceof Employee);
     team.push(manager);
     fetchOptions();
   })
@@ -113,7 +111,6 @@ function fetchOptions() {
     choices: ["Add an engineer", "Add an intern", "Finish building the team"]
   }
 ]).then((response) => {
-  console.log(response.userChoice);
   if (response.userChoice === "Add an engineer") {
     addEngineer();
   } else if (response.userChoice === "Add an intern") {
@@ -177,10 +174,8 @@ function addIntern() {
       }
     }
   ]).then((response) => {
-    console.log(response);
     // Once we have all the necessary data we create an intern object and push it to the team array
     const intern = new Intern(response.internName, response.internID, response.internEmail, response.school);
-    console.log(intern instanceof Employee);
     team.push(intern);
     fetchOptions();
   })
@@ -238,9 +233,7 @@ function addEngineer() {
       }
     }
   ]).then((response) => {
-    console.log(response);
     const engineer = new Engineer(response.engineerName, response.engineerID, response.engineerEmail, response.github);
-    console.log(engineer instanceof Employee);
     team.push(engineer);
     fetchOptions();
   })
