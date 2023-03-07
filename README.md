@@ -39,7 +39,10 @@ It is a simple console application that let you create your team profile and dis
   ```
   node index.js
   ```
-  As a user after you ran the command you will be asked about the team manager's name, email, employee ID and office number. Then you will be presented with a menu  with the options to add an engineer, add an intern or finish building the team. If you select the engineer option then you will be prompted to enter the engineer's name, employee ID, email and GitHub username. If you select the intern option then you will be asked to enter the intern's name, employee ID, email and school. If you decide to finish the application then the render function will be called, a HTML file will be generated with the given data and it will be written in the team.html document.
+  As a user after you ran the command you will be asked about the team manager's name, email, employee ID and office number. Then you will be presented with a menu  with the options to add an engineer, add an intern or finish building the team. If you select the engineer option then you will be prompted to enter the engineer's name, employee ID, email and GitHub username. If you select the intern option then you will be asked to enter the intern's name, employee ID, email and school. If you decide to finish the application then the render function will be called, a HTML file will be generated with the given data and it will be written in the team.html document. You can see a mockup image of a sample html file below that was created with the application:
+
+  <br>
+  <img src="assets/Team-Profile-Generator-mockup.png" alt="Mockup image of a sample HTML file created with the application" style="width:500px;"/>
 
   You can see a sample html file in the output folder that has been created with the application. Please refer to the team.html file.
 
