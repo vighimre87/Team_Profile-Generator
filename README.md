@@ -43,6 +43,7 @@ It is a simple console application that let you create your team profile and dis
 
   <br>
   <img src="assets/Team-Profile-Generator-mockup.png" alt="Mockup image of a sample HTML file created with the application" style="width:500px;"/>
+  <br>
 
   You can see a sample html file in the output folder that has been created with the application. Please refer to the team.html file.
 
